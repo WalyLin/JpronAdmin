@@ -1,0 +1,66 @@
+{
+    "name": "tangwei/apidocs",
+    "description": "A swagger library for Hyperf.",
+    "license": "MIT",
+    "keywords": [
+      "php",
+      "docs",
+      "hyperf",
+      "swagger",
+      "hyperf swagger"
+    ],
+  "authors": [
+    {
+      "name": "TangWei",
+      "email": "tw2066@163.com",
+      "homepage": "https://github.com/tw2066",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "tangwei/dto": "~3.0.0",
+    "zircote/swagger-php": "^4.8"
+  },
+  "conflict": {
+    "zircote/swagger-php": "=4.8.7"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "mockery/mockery": "^1.0",
+    "phpstan/phpstan": "^1.0",
+    "phpunit/phpunit": ">=7.0",
+    "symfony/var-dumper": "^5.1"
+  },
+  "suggest": {
+    "tangwei/knife4j-ui": "It can be as small as a dagger, lightweight, and powerful!",
+    "tangwei/swagger-ui": "If the Internet cannot be accessed, you are advised to install it"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hyperf\\ApiDocs\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HyperfTest\\ApiDocs\\": "tests/"
+    }
+  },
+  "extra": {
+    "hyperf": {
+      "config": "Hyperf\\ApiDocs\\ConfigProvider"
+    },
+    "branch-alias": {
+      "dev-master": "3.0.x-dev"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "scripts": {
+    "test": "phpunit -c phpunit.xml --colors=always",
+    "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+    "cs-fix": "php-cs-fixer fix src && php-cs-fixer fix tests"
+  }
+}
