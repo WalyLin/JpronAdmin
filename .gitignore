@@ -1,0 +1,15 @@
+
+*.~
+*.tmp
+.idea/
+_book/
+*.swp
+*.edx
+.DS_Store
+
+package-lock.json
+
+docker-compose.override.yml
+
+./runtime
+./runtime/*
