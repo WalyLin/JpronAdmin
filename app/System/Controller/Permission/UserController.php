@@ -244,4 +244,16 @@ class UserController extends MineController
     {
         return $this->success($this->service->getRemoteList($this->request->all()));
     }
+
+
+
+    /**
+     * 获取用户列表
+     * @return ResponseInterface
+     */
+    #[GetMapping("getList")]
+    public function getList(): ResponseInterface
+    {
+        return $this->success($this->service->getList($this->request->all()));
+    }
 }

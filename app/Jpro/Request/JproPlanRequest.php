@@ -26,7 +26,7 @@ class JproPlanRequest extends MineFormRequest
         return [];
     }
 
-    
+
     /**
      * 新增数据验证规则
      * return array
@@ -36,8 +36,7 @@ class JproPlanRequest extends MineFormRequest
         return [
             //用户id 验证
             'user_id' => 'required',
-            //事件类型 验证
-            'plan_type' => 'required',
+
             //状态 验证
             'status' => 'required',
 
@@ -52,15 +51,14 @@ class JproPlanRequest extends MineFormRequest
         return [
             //用户id 验证
             'user_id' => 'required',
-            //事件类型 验证
-            'plan_type' => 'required',
+
             //状态 验证
             'status' => 'required',
 
         ];
     }
 
-    
+
     /**
      * 字段映射名称
      * return array
@@ -70,7 +68,7 @@ class JproPlanRequest extends MineFormRequest
         return [
             'id' => '',
             'user_id' => '用户id',
-            'plan_type' => '事件类型',
+
             'remark' => '备注',
             'status' => '状态',
 

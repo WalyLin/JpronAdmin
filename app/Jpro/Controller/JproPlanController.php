@@ -14,6 +14,7 @@ namespace App\Jpro\Controller;
 
 use App\Jpro\Service\JproPlanService;
 use App\Jpro\Request\JproPlanRequest;
+use App\System\Mapper\SystemUserMapper;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\DeleteMapping;
@@ -30,7 +31,7 @@ use Mine\Middlewares\CheckModuleMiddleware;
 use Hyperf\HttpServer\Annotation\Middleware;
 
 /**
- * 事件管理控制器
+ * 任务管理控制器
  * Class JproPlanController
  */
 #[Controller(prefix: "jpro/plan"), Auth]
@@ -44,7 +45,7 @@ class JproPlanController extends MineController
     #[Inject]
     protected JproPlanService $service;
 
-    
+
     /**
      * 列表
      * @return ResponseInterface
@@ -225,4 +226,6 @@ class JproPlanController extends MineController
     {
         return $this->success($this->service->getRemoteList($this->request->all()));
     }
+
+
 }
