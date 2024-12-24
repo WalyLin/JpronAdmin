@@ -36,7 +36,7 @@ class SystemUserRequest extends MineFormRequest
             'username' => 'required|max:20',
             'password' => 'required|min:6',
             'phone' => 'phone_number',
-            'email' => 'email',
+            // 'email' => 'email',
             'dept_ids' => 'required',
             'role_ids' => 'required',
             'remark' => 'max:255',
@@ -52,7 +52,7 @@ class SystemUserRequest extends MineFormRequest
         return [
             'username' => 'required|max:20',
             'phone' => 'phone_number',
-            'email' => 'email',
+            // 'email' => 'email',
             'dept_ids' => 'required',
             'role_ids' => 'required',
             'remark' => 'max:255',
@@ -124,7 +124,7 @@ class SystemUserRequest extends MineFormRequest
         return [
             'username' => 'max:20',
             'phone' => 'phone_number',
-            'email' => 'email',
+            // 'email' => 'email',
             'signed' => 'max:255',
         ];
     }

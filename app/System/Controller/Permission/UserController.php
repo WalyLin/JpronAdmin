@@ -254,6 +254,6 @@ class UserController extends MineController
     #[GetMapping("getList")]
     public function getList(): ResponseInterface
     {
-        return $this->success($this->service->getList($this->request->all()));
+        return $this->success($this->service->mapper->handleListItems($this->service->getList($this->request->all())));
     }
 }

@@ -35,4 +35,8 @@ class JproPlanType extends MineModel
      * The attributes that should be cast to native types.
      */
     protected array $casts = ['id' => 'integer', 'pid' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function plans(){
+        return $this->hasMany(JproPlan::class,'plan_type','id');    
+    }
 }

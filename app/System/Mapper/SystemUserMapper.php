@@ -234,4 +234,13 @@ class SystemUserMapper extends AbstractMapper
         }
         return $this->model::query()->whereIn('id', $ids)->select($select)->get()->toArray();
     }
+
+    public function handleListItems($items){
+
+        foreach ($items as &$item){
+            $item['username_and_nickname'] = $item['username'] . '(' . $item['nickname'] . ')';            
+        }
+
+        return $items;
+    }
 }

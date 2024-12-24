@@ -35,11 +35,11 @@ class JproPlanTypeRequest extends MineFormRequest
     {
         return [
             //上级分类 验证
-            'pid' => 'required',
+            'pid' => 'sometimes',
             //类型名称 验证
             'name' => 'required',
             //可以查看角色 验证
-            'role' => 'required',
+            'role' => 'sometimes',
             //状态 验证
             'status' => 'required',
 
@@ -53,11 +53,11 @@ class JproPlanTypeRequest extends MineFormRequest
     {
         return [
             //上级分类 验证
-            'pid' => 'required',
+            'pid' => 'sometimes',
             //类型名称 验证
             'name' => 'required',
             //可以查看角色 验证
-            'role' => 'required',
+            'role' => 'sometimes',
             //状态 验证
             'status' => 'required',
 
