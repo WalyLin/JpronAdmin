@@ -16,8 +16,10 @@ use App\System\Model\SystemDept;
 use App\System\Model\SystemUser;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Model;
+use Hyperf\DbConnection\Db;
 use Mine\Abstracts\AbstractMapper;
 use Mine\Annotation\Transaction;
+use Mine\Exception\MineException;
 use Mine\MineModel;
 
 /**
@@ -92,8 +94,8 @@ class SystemUserMapper extends AbstractMapper
         $result = parent::update($id, $data);
         $user = $this->model::find($id);
         if ($user && $result) {
-            ! empty($role_ids) && $user->roles()->sync($role_ids);
-            ! empty($dept_ids) && $user->depts()->sync($dept_ids);
+            !empty($role_ids) && $user->roles()->sync($role_ids);
+            !empty($dept_ids) && $user->depts()->sync($dept_ids);
             $user->posts()->sync($post_ids);
             return true;
         }
@@ -147,7 +149,7 @@ class SystemUserMapper extends AbstractMapper
                 })
                 ->pluck('id')
                 ->toArray();
-            $query->whereHas('depts', fn ($query) => $query->whereIn('id', $deptIds));
+            $query->whereHas('depts', fn($query) => $query->whereIn('id', $deptIds));
         }
         if (isset($params['username']) && filled($params['username'])) {
             $query->where('username', 'like', '%' . $params['username'] . '%');
@@ -183,13 +185,15 @@ class SystemUserMapper extends AbstractMapper
         if (isset($params['showDept']) && filled($params['showDept'])) {
             $isAll = $params['showDeptAll'] ?? false;
 
-            $query->with(['depts' => function ($query) use ($isAll) {
-                /*
-                 *  @var Builder $query
-                 */
-                $query->where('status', SystemDept::ENABLE);
-                return $isAll ? $query->select(['*']) : $query->select(['id', 'name']);
-            }]);
+            $query->with([
+                'depts' => function ($query) use ($isAll) {
+                    /*
+                     *  @var Builder $query
+                     */
+                    $query->where('status', SystemDept::ENABLE);
+                    return $isAll ? $query->select(['*']) : $query->select(['id', 'name']);
+                }
+            ]);
         }
 
         if (isset($params['role_id']) && filled($params['role_id'])) {
@@ -229,18 +233,36 @@ class SystemUserMapper extends AbstractMapper
      */
     public function getUserInfoByIds(array $ids, ?array $select = null): array
     {
-        if (! $select) {
+        if (!$select) {
             $select = ['id', 'username', 'nickname', 'phone', 'email', 'created_at'];
         }
         return $this->model::query()->whereIn('id', $ids)->select($select)->get()->toArray();
     }
 
-    public function handleListItems($items){
+    public function handleListItems($items)
+    {
 
-        foreach ($items as &$item){
-            $item['username_and_nickname'] = $item['username'] . '(' . $item['nickname'] . ')';            
+        foreach ($items as &$item) {
+            $item['username_and_nickname'] = $item['username'] . '(' . $item['nickname'] . ')';
         }
 
         return $items;
+    }
+
+    public function getDoctorList()
+    {
+        $role = container()->get(SystemRoleMapper::class)->first([['code', 'doctor']]);
+        if (!$role) {
+            throw new MineException('请先创建医生角色');
+        }
+        
+        $users = $role->users()->get();                
+        return array_map(function ($user) {
+            return [
+                'id' => $user['id'],
+                'name' => $user['username'] . '(' . $user['nickname'] . ')'
+            ];
+        }, $users->toArray());
+
     }
 }

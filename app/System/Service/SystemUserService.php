@@ -129,7 +129,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
             foreach ($users as $user) {
                 // 如果是已经加入到黑名单的就代表不是登录状态了
                 // 重写正则 用来 匹配 多点登录 使用的token的key
-                if (! $this->hasTokenBlack($redis->get($user)) && preg_match('/:(\d+)(:|$)/', $user, $match) && isset($match[1])) {
+                if (!$this->hasTokenBlack($redis->get($user)) && preg_match('/:(\d+)(:|$)/', $user, $match) && isset($match[1])) {
                     $userIds[] = $match[1];
                 }
             }
@@ -150,7 +150,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
      */
     public function delete(array $ids): bool
     {
-        if (! empty($ids)) {
+        if (!empty($ids)) {
             if (($key = array_search(env('SUPER_ADMIN'), $ids)) !== false) {
                 unset($ids[$key]);
             }
@@ -169,7 +169,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
      */
     public function realDelete(array $ids): bool
     {
-        if (! empty($ids)) {
+        if (!empty($ids)) {
             if (($key = array_search(env('SUPER_ADMIN'), $ids)) !== false) {
                 unset($ids[$key]);
             }
@@ -197,7 +197,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
             $jwt = $this->container->get(JWT::class);
             foreach ($users as $user) {
                 $token = $redis->get($user);
-                if (! is_string($token)) {
+                if (!is_string($token)) {
                     continue;
                 }
                 $scene = $jwt->getParserData($token)['jwt_scene'];
@@ -264,7 +264,7 @@ class SystemUserService extends AbstractService implements UserServiceInterface
      */
     public function updateInfo(array $params): bool
     {
-        if (! isset($params['id'])) {
+        if (!isset($params['id'])) {
             return false;
         }
 
@@ -336,16 +336,16 @@ class SystemUserService extends AbstractService implements UserServiceInterface
      */
     protected function handleData(array $data): array
     {
-        if (! is_array($data['role_ids'])) {
+        if (!is_array($data['role_ids'])) {
             $data['role_ids'] = explode(',', $data['role_ids']);
         }
         if (($key = array_search(env('ADMIN_ROLE'), $data['role_ids'])) !== false) {
             unset($data['role_ids'][$key]);
         }
-        if (! empty($data['post_ids']) && ! is_array($data['post_ids'])) {
+        if (!empty($data['post_ids']) && !is_array($data['post_ids'])) {
             $data['post_ids'] = explode(',', $data['post_ids']);
         }
-        if (! empty($data['dept_ids']) && ! is_array($data['dept_ids'])) {
+        if (!empty($data['dept_ids']) && !is_array($data['dept_ids'])) {
             $data['dept_ids'] = explode(',', $data['dept_ids']);
         }
         return $data;
@@ -358,12 +358,19 @@ class SystemUserService extends AbstractService implements UserServiceInterface
         $scene = $jwt->getParserData($token)['jwt_scene'];
         $scenes = array_keys(config('jwt.scene'));
         $jti = $jwt->getParserData($token)['jti'];
-        if (in_array($scene, $scenes) && $jwt->setScene($scene)->blackList->hasTokenBlack(
-            $jwt->getParserData($token),
-            $jwt->getSceneConfig($scene)
-        )) {
+        if (
+            in_array($scene, $scenes) && $jwt->setScene($scene)->blackList->hasTokenBlack(
+                $jwt->getParserData($token),
+                $jwt->getSceneConfig($scene)
+            )
+        ) {
             return true;
         }
         return false;
+    }
+
+    public function getDoctorList()
+    {
+        return $this->mapper->getDoctorList();
     }
 }

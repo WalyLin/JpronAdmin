@@ -169,4 +169,9 @@ class SystemDeptService extends AbstractService
         array_splice($descendantLevelArr, 0, $position, $handleDataLevelArr);
         return implode(',', $descendantLevelArr);
     }
+
+    public function getHospitalList(){
+        
+        return $this->mapper->getHospitalList();
+    }
 }

@@ -189,4 +189,14 @@ class SystemDeptMapper extends AbstractMapper
         }
         return $query;
     }
+
+    public function getHospitalList(){
+        $parentId = $this->value([['name','=','医院']]);
+        if(!$parentId) {
+            throw new MineException('请先设置医院部门');
+        }
+
+        $deptList = $this->model::query()->where('parent_id', $parentId)->get(['id','name']);
+        return $deptList;
+    }
 }
