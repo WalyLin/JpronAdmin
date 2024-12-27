@@ -22,7 +22,7 @@ return [
     'storage' => [
         'local' => [
             'driver' => LocalAdapterFactory::class,
-            'root' => __DIR__ . '/../../public/' . env('UPLOAD_PATH', 'uploadfile'),
+            'root' => env('MY_UPLOAD_PATH') ? env('MY_UPLOAD_PATH') : __DIR__ . '/../../public/' . env('UPLOAD_PATH', 'uploadfile'),
         ],
         'oss' => [
             'driver' => AliyunOssAdapterFactory::class,
