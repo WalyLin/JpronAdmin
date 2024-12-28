@@ -44,7 +44,7 @@ class JproMotherController extends MineController
     #[Inject]
     protected JproMotherService $service;
 
-    
+
     /**
      * 列表
      * @return ResponseInterface
@@ -103,7 +103,9 @@ class JproMotherController extends MineController
     #[PostMapping("save"), Permission("jpro:mother:save"), OperationLog]
     public function save(JproMotherRequest $request): ResponseInterface
     {
-        return $this->success(['id' => $this->service->save($request->all())]);
+        $data = $request->all();
+        $data['passport'] = $data['passport'] ?? '';
+        return $this->success(['id' => $this->service->save($data)]);
     }
 
     /**
@@ -117,7 +119,9 @@ class JproMotherController extends MineController
     #[PutMapping("update/{id}"), Permission("jpro:mother:update"), OperationLog]
     public function update(int $id, JproMotherRequest $request): ResponseInterface
     {
-        return $this->service->update($id, $request->all()) ? $this->success() : $this->error();
+        $data = $request->all();
+        $data['passport'] = $data['passport'] ?? '';
+        return $this->service->update($id, $data) ? $this->success() : $this->error();
     }
 
     /**

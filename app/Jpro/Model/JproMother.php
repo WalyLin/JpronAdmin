@@ -49,7 +49,7 @@ class JproMother extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'name', 'age', 'body_status', 'gravida', 'operation', 'food_allergy', 'drug_allergy', 'complication', 'height', 'weight', 'last_menstrual_time', 'arrive_time', 'bleed_amount', 'children_amount', 'menstrual_freq', 'tag', 'tag_remark', 'hospital_id', 'doctor_id', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'name', 'age', 'surname', 'passport', 'hep_b', 'body_status', 'gravida', 'operation', 'food_allergy', 'drug_allergy', 'complication', 'height', 'weight', 'last_menstrual_time', 'arrive_time', 'bleed_amount', 'children_amount', 'menstrual_freq', 'tag', 'tag_remark', 'hospital_id', 'doctor_id', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

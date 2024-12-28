@@ -45,7 +45,12 @@ class JproMotherMapper extends AbstractMapper
             $query->where('id', '=', $params['id']);
         }
 
-        // 姓名
+        // 姓
+        if (isset($params['surname']) && filled($params['surname'])) {
+            $query->where('surname', 'like', '%' . $params['surname'] . '%');
+        }
+
+        // 名
         if (isset($params['name']) && filled($params['name'])) {
             $query->where('name', 'like', '%' . $params['name'] . '%');
         }
@@ -211,7 +216,7 @@ class JproMotherMapper extends AbstractMapper
         foreach ($items as &$item) {
             if (isset($records[$item['id']])) {
                 $records[$item['id']]['check_time'] = substr($records[$item['id']]['check_time'], 0, 10);
-                $item['last_check_record'] = $records[$item['id']];                
+                $item['last_check_record'] = $records[$item['id']];
             } else {
                 $item['last_check_record'] = null;
             }

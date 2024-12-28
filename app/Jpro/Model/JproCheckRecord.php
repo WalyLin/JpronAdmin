@@ -33,7 +33,7 @@ class JproCheckRecord extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'mother_id', 'detail', 'hospital_id', 'doctor_id', 'check_time', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'mother_id', 'detail', 'menstrual', 'status', 'hospital_id', 'doctor_id', 'check_time', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
