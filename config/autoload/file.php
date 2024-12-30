@@ -23,6 +23,7 @@ return [
         'local' => [
             'driver' => LocalAdapterFactory::class,
             'root' => env('MY_UPLOAD_PATH') ? env('MY_UPLOAD_PATH') : __DIR__ . '/../../public/' . env('UPLOAD_PATH', 'uploadfile'),
+            'directory_visibility' => 'public',
         ],
         'oss' => [
             'driver' => AliyunOssAdapterFactory::class,
