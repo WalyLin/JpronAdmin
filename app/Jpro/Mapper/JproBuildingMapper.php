@@ -93,6 +93,10 @@ class JproBuildingMapper extends AbstractMapper
     {
         foreach ($items as &$item) {
             $item['room_count'] = $item->rooms->count();
+            $item['mother_count'] = 0;
+            foreach ($item->rooms as $room) {
+                $item['mother_count'] += $room->mothers->count();
+            }
         }
         return $items;
     }
