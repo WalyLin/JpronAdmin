@@ -27,6 +27,9 @@ use Mine\MineModel;
  * @property int $menstrual_freq 多少天一次月经
  * @property string $tag 标签
  * @property string $tag_remark 标签备注
+ * @property string $building 楼号 
+ * @property string $room 房间号 
+ * @property string $hep_b_date 乙肝疫苗注射日期
  * @property int $hospital_id 医院
  * @property int $doctor_id 医生
  * @property string $remark 备注
@@ -49,7 +52,7 @@ class JproMother extends MineModel
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'name', 'age', 'surname', 'passport', 'hep_b', 'body_status', 'gravida', 'operation', 'food_allergy', 'drug_allergy', 'complication', 'height', 'weight', 'last_menstrual_time', 'arrive_time', 'bleed_amount', 'children_amount', 'menstrual_freq', 'tag', 'tag_remark', 'hospital_id', 'doctor_id', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
+    protected array $fillable = ['id', 'name', 'age', 'surname', 'passport', 'hep_b', 'body_status', 'gravida', 'operation', 'food_allergy', 'drug_allergy', 'complication', 'height', 'weight', 'last_menstrual_time', 'arrive_time', 'bleed_amount', 'children_amount', 'menstrual_freq', 'tag', 'tag_remark', 'building', 'room', 'hep_b_date', 'hospital_id', 'doctor_id', 'remark', 'extra', 'created_by', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * The attributes that should be cast to native types.

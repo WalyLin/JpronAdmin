@@ -122,6 +122,7 @@ class JproCheckRecordMapper extends AbstractMapper
     {
         foreach ($items as &$item) {
             $item['check_time'] = substr($item['check_time'], 0, 10);
+            $item->mother_passport = $item->mother->passport; 
         }
         return $items;
     }
